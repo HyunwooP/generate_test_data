@@ -1,7 +1,8 @@
 import mongo from "./lib/mongo";
 import redis from "./lib/redis";
+import mysql from "./lib/mysql";
 import { errorHendler } from "./lib/common";
-import { mongoOption, redisOption } from "./lib/common/const";
+import { mongoOption, redisOption, mysqlOption } from "./lib/common/const";
 
 export const init = async (type) => {
 
@@ -13,6 +14,8 @@ export const init = async (type) => {
                 break;
             case "redis" : start = await redis(redisOption);
                 break;
+            case "mysql" : start = await mysql(mysqlOption);
+                break;
             default : start = await mongo(mongoOption);
         }
 
@@ -22,4 +25,4 @@ export const init = async (type) => {
     }
 }
 
-init("redis");
+init("mysql");
