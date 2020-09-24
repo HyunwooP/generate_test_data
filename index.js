@@ -1,20 +1,30 @@
 import mongo from "./lib/mongo";
-import { generateModel } from './lib/mongo';
+import redis from "./lib/redis";
+import { generateModel } from "./lib/mongo";
+
+let start;
 
 export const mongoInit = async (options) => {
     try {
-        const start = await mongo(options);
+        start = await mongo(options);
         console.log(start);
     } catch(e) {
         throw e;
     }
 };
 
-export const redisInit = () => {
-    
+export const redisInit = async (options) => {
+    try {
+        start = await redis(options);
+        console.log(start);
+    } catch(e) {
+        throw e;
+    }
 };
 
 const option = {
-    url: "mongodb://localhost:27017",
-    collection: "test",
+    host: "127.0.0.1",
+    port: 6379
 }
+
+redisInit(option);
