@@ -23,6 +23,7 @@ Author: 박현우
 ```
 1. Mongo option
     {
+        type: mongo
         collection: string / 테스트 데이터를 밀어넣을 타겟
         url: string / 데이터베이스 endpoint
         count: 테스트 데이터 갯수
@@ -31,6 +32,7 @@ Author: 박현우
 
 2. Redis option
     {
+        type: redis
         host: string / 데이터베이스 endpoint
         port: number / 데이터베이스 endpoint 포트
         count: 테스트 데이터 갯수

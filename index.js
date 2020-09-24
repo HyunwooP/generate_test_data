@@ -1,30 +1,33 @@
 import mongo from "./lib/mongo";
 import redis from "./lib/redis";
-import { generateModel } from "./lib/mongo";
+import { errorHendler } from "./lib/common";
 
-let start;
+export const init = async (options) => {
+    
+    if (!options.type) errorHendler("please confirm your db type");
 
-export const mongoInit = async (options) => {
+    let start;
+
     try {
-        start = await mongo(options);
+        switch (options.type) {
+            case "mongo" : start = await mongo(options);
+                break;
+            case "redis" : start = await redis(options);
+                break;
+            default : start = await mongo(options);
+        }
+
         console.log(start);
     } catch(e) {
         throw e;
     }
-};
+}
 
-export const redisInit = async (options) => {
-    try {
-        start = await redis(options);
-        console.log(start);
-    } catch(e) {
-        throw e;
-    }
-};
 
 const option = {
+    type: "redis",
     host: "127.0.0.1",
     port: 6379
 }
 
-redisInit(option);
+init(option);
